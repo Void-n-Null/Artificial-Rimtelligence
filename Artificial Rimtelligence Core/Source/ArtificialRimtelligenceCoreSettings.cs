@@ -8,11 +8,36 @@ namespace ArtificialRimtelligenceCore
     /// </summary>
     public class ArtificialRimtelligenceCoreSettings : ModSettings
     {
-        // Add your settings fields here
-        // Example:
-        // public bool EnableFeature = true;
-        // public string SomeSetting = "";
-        // public int SomeValue = 10;
+        /// <summary>
+        /// OpenRouter API key obtained via PKCE OAuth flow or manual entry.
+        /// </summary>
+        public string OpenRouterApiKey = "";
+
+        /// <summary>
+        /// Buffer for manual API key entry in settings UI.
+        /// </summary>
+        [Unsaved]
+        public string ManualApiKeyBuffer = "";
+
+        /// <summary>
+        /// Returns true if an API key is configured.
+        /// </summary>
+        public bool HasApiKey => !string.IsNullOrEmpty(OpenRouterApiKey);
+
+        /// <summary>
+        /// Returns a masked version of the API key for display.
+        /// </summary>
+        public string MaskedApiKey
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(OpenRouterApiKey))
+                    return "(not set)";
+                if (OpenRouterApiKey.Length <= 12)
+                    return "****";
+                return OpenRouterApiKey.Substring(0, 8) + "..." + OpenRouterApiKey.Substring(OpenRouterApiKey.Length - 4);
+            }
+        }
 
         /// <summary>
         /// Called by RimWorld to save/load settings.
@@ -21,12 +46,16 @@ namespace ArtificialRimtelligenceCore
         public override void ExposeData()
         {
             base.ExposeData();
-            
-            // Add your settings serialization here
-            // Example:
-            // Scribe_Values.Look(ref EnableFeature, "enableFeature", true);
-            // Scribe_Values.Look(ref SomeSetting, "someSetting", "");
-            // Scribe_Values.Look(ref SomeValue, "someValue", 10);
+            Scribe_Values.Look(ref OpenRouterApiKey, "openRouterApiKey", "");
+        }
+
+        /// <summary>
+        /// Clears the stored API key.
+        /// </summary>
+        public void ClearApiKey()
+        {
+            OpenRouterApiKey = "";
+            Write();
         }
     }
 }

@@ -27,6 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\auth_success.html" />
+    <EmbeddedResource Include="Resources\auth_error.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="@(PackageReference)" PrivateAssets="all" />
   </ItemGroup>
 
