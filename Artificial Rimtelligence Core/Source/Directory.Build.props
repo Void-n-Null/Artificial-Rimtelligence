@@ -1,0 +1,16 @@
+<!--
+  Directory.Build.props - Shared MSBuild properties for all projects in this directory.
+  This file is automatically imported by MSBuild/dotnet.
+-->
+<Project>
+  <PropertyGroup>
+    <!-- Suppress common warnings that aren't relevant for RimWorld mods -->
+    <NoWarn>$(NoWarn);CS0436</NoWarn>
+    
+    <!-- Deterministic builds for reproducibility -->
+    <Deterministic>true</Deterministic>
+    
+    <!-- Treat warnings as errors in Release builds -->
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

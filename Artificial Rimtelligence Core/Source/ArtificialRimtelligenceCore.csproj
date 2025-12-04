@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- RimWorld 1.6 uses .NET Framework 4.8 (1.5 used 4.7.2) -->
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>ArtificialRimtelligenceCore</AssemblyName>
+    <RootNamespace>ArtificialRimtelligenceCore</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    
+    <!-- Output directly to Assemblies folder -->
+    <OutputPath>../Assemblies/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    
+    <!-- Debug settings - set to None for release builds to reduce file size -->
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    
+    <!-- Disable unnecessary outputs -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*" />
+    <PackageReference Include="Lib.Harmony" Version="2.3.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="@(PackageReference)" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
